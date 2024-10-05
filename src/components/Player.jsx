@@ -18,9 +18,9 @@ export default function Player({ initialName, symbol }) {
     //สำคัญต้องใช้ function ในการเปลี่ยนค่าบน state ถ้าอิงค่าจาก state เดิม!!!!
   }
 
-  function handleChange(event){
+ /* function handleChange(event){
     setPlayerName(event.target.value);
-  }
+  }*/
 
   return (
     <li>
@@ -28,7 +28,7 @@ export default function Player({ initialName, symbol }) {
         {isEditing === false ? (
           <span className="player-name">{playerName}</span>
         ) : (
-          <input className="player-name" type="text" value={playerName} onChange={handleChange} required/>
+          <input className="player-name" type="text" value={playerName} onChange={(event)=>{setPlayerName(event.target.value)}} required/>
         )}
         <span className="player-symbol">{symbol}</span>
       </span>
