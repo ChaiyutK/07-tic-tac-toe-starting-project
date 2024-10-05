@@ -1,11 +1,38 @@
-export default function Player({name,symbol}){
-    return (
-        <li>
-            <span className="player">
-              <span className="player-name">{name}</span>
-              <span className="player-symbol">{symbol}</span>
-            </span>
-            <button>Edit</button>
-        </li>
-    );
+import { useState } from "react";
+
+export default function Player({ initialName, symbol }) {
+    const [playerName,setPlayerName] = useState(initialName);
+    const [isEditing, setIsEditing] = useState(false);
+
+  function handleEditClick() {
+    /*
+    if (isEditing === false) {
+      setIsEditing(true);
+    } else {
+      setIsEditing(false);
+    }
+        we have shorther way below...   
+    */
+
+    setIsEditing((editing)=> !editing);
+    //สำคัญต้องใช้ function ในการเปลี่ยนค่าบน state ถ้าอิงค่าจาก state เดิม!!!!
+  }
+
+  function handleChange(event){
+    setPlayerName(event.target.value);
+  }
+
+  return (
+    <li>
+      <span className="player">
+        {isEditing === false ? (
+          <span className="player-name">{playerName}</span>
+        ) : (
+          <input className="player-name" type="text" value={playerName} onChange={handleChange} required/>
+        )}
+        <span className="player-symbol">{symbol}</span>
+      </span>
+      <button onClick={handleEditClick}>{isEditing?"Save":"Edit"}</button>
+    </li>
+  );
 }
