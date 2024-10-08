@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Player({ initialName, symbol , isActive}) {
+export default function Player({ initialName, symbol , isActive,onChangeName}) {
     const [playerName,setPlayerName] = useState(initialName);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -15,6 +15,9 @@ export default function Player({ initialName, symbol , isActive}) {
     */
 
     setIsEditing((editing)=> !editing);
+    if(isEditing){
+      onChangeName(symbol,playerName);
+    }
     //สำคัญต้องใช้ function ในการเปลี่ยนค่าบน state ถ้าอิงค่าจาก state เดิม!!!!
   }
 
