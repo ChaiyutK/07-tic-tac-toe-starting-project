@@ -28,7 +28,8 @@ function App() {
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = initialGameBoard;
+  //if use separate operator will copy value from array not refferent!
+  let gameBoard = [...initialGameBoard.map(array=>[...array])];
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -75,6 +76,10 @@ function App() {
     });
   }
 
+  function handleRestart(){
+    setGameTurns([]);
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -90,7 +95,7 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} />}
+        {(winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart}/>}
         <GameBoard onSelectSqure={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
